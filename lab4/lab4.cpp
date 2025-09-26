@@ -9,6 +9,8 @@
 //#include <set>
 //#include <map>
 //#include <algorithm>
+#include "MyString.h"
+#include "Point.h"
 
 using namespace std;
 #define	  stop __asm nop
