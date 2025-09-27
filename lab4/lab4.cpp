@@ -194,12 +194,21 @@ int main()
 	//Измените значения первого и последнего элементов посредством front() и back()
 	//Подумайте, что требуется сделать при уничтожении такой очереди?
 	{
-
-
-
-
-
-
+		std::queue<Point*, std::deque<Point*>> q;
+		q.push(new Point(1, 2));
+		q.push(new Point(3, 4));
+		q.push(new Point(5, 6));
+		std::cout << "First element: " << *(q.front()) << std::endl;
+		std::cout << "Last element: " << *(q.back()) << std::endl;
+		*(q.front()) = Point(7, 8);
+		*(q.back()) = Point(9, 10);
+		std::cout << "After modification:" << std::endl;
+		std::cout << "First element: " << *(q.front()) << std::endl;
+		std::cout << "Last element: " << *(q.back()) << std::endl;
+		while (!q.empty()) { // Answer: this is necessary.
+			delete q.front();
+			q.pop();
+		}
 	}
 	////////////////////////////////////////////////////////////////////////////////////
 	//priority_queue
