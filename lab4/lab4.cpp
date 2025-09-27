@@ -111,6 +111,17 @@ int main()
 	//а) элементы стека стали копиями элементов вектора
 	//б) при выводе значений как вектора, так и стека порядок значений был одинаковым 
 
+	{
+		std::vector<int> v = { 1, 2, 3, 4, 5 };
+		std::stack<int> s;
+		for (auto it = v.rbegin(); it != v.rend(); ++it)
+			s.push(*it);
+		pr(v, "Vector: ");
+		std::cout << "Stack: ";
+		printContainer(s);
+		std::cout << "\n\n";
+	}
+
 
 
 	//Сравнение и копирование стеков
@@ -120,10 +131,58 @@ int main()
 	//г) модифицируйте любой из стеком любым образом (push, pop, top)
 	//д) проверьте, какой из стеков больше (подумайте, какой смысл вкладывается в такое сравнение)
 	{
-
-
-		//stop
-
+		std::stack<int> s1;
+		s1.push(1);
+		s1.push(2);
+		s1.push(3);
+		std::stack<int> s2 = s1;
+		std::cout << "Stack s1: ";
+		printContainer(s1);
+		std::cout << "Stack s2 (copy of s1): ";
+		printContainer(s2);
+		if (s1 == s2)
+			std::cout << "Stacks are equal.\n";
+		else
+			std::cout << "Stacks are not equal.\n";
+		s1.push(4);
+		if (s1 > s2)
+			std::cout << "Stack s1 is greater than stack s2.\n";
+		else if (s1 < s2)
+			std::cout << "Stack s1 is less than stack s2.\n";
+		else
+			std::cout << "Stacks are equal.\n";
+		s2.push(5);
+		if (s1 > s2)
+			std::cout << "Stack s1 is greater than stack s2.\n";
+		else if (s1 < s2)
+			std::cout << "Stack s1 is less than stack s2.\n";
+		else
+			std::cout << "Stacks are equal.\n";
+		s1.push(7);
+		s2.push(6);
+		if (s1 > s2)
+			std::cout << "Stack s1 is greater than stack s2.\n";
+		else if (s1 < s2)
+			std::cout << "Stack s1 is less than stack s2.\n";
+		else
+			std::cout << "Stacks are equal.\n";
+		s1.push(8);
+		s2.push(8);
+		if (s1 > s2)
+			std::cout << "Stack s1 is greater than stack s2.\n";
+		else if (s1 < s2)
+			std::cout << "Stack s1 is less than stack s2.\n";
+		else
+			std::cout << "Stacks are equal.\n";
+		s2.pop(); s2.pop();
+		s2.push(9);
+		if (s1 > s2)
+			std::cout << "Stack s1 is greater than stack s2.\n";
+		else if (s1 < s2)
+			std::cout << "Stack s1 is less than stack s2.\n";
+		else
+			std::cout << "Stacks are equal.\n";
+		std::cout << "\n\n";
 	}
 
 
