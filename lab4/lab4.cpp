@@ -111,6 +111,17 @@ int main()
 	//а) элементы стека стали копиями элементов вектора
 	//б) при выводе значений как вектора, так и стека порядок значений был одинаковым 
 
+	{
+		std::vector<int> v = { 1, 2, 3, 4, 5 };
+		std::stack<int> s;
+		for (auto it = v.rbegin(); it != v.rend(); ++it)
+			s.push(*it);
+		pr(v, "Vector: ");
+		std::cout << "Stack: ";
+		printContainer(s);
+		std::cout << "\n\n";
+	}
+
 
 
 	//Сравнение и копирование стеков
