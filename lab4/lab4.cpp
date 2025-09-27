@@ -4,16 +4,19 @@
 //Итераторы. Стандартные алгоритмы. Предикаты.
 
 #include <iostream>
-//#include <vector>
+#include <vector>
+#include <deque>
 //#include <list>
 //#include <set>
 //#include <map>
 //#include <algorithm>
+#include "helpers.hpp"
 #include "MyString.h"
 #include "Point.h"
 
-using namespace std;
-#define	  stop __asm nop
+//using namespace std;
+//#define	  //stop __asm nop
+
 
 
 int main()
@@ -26,6 +29,10 @@ int main()
 	//разработанного Вами в предыдущем задании универсального шаблона
 	//выведите значения элементов на печать
 
+	std::vector<Point> vec = { Point(1, 2), Point(3, 4), Point(5, 6) };
+	std::deque<Point> d;
+	d.assign(vec.begin(), vec.end());
+	pr(d, "Deque of Points");
 
 
 	//Создайте deque с элементами типа MyString. Заполните его значениями
@@ -33,6 +40,24 @@ int main()
 	//С помощью erase удалите из deque все элементы, в которых строчки
 	//начинаются с 'A' или 'a'
 
+	std::deque<MyString> ds;
+	ds.push_back(MyString("Apple"));
+	ds.push_front(MyString("banana"));
+	ds.push_back(MyString("Apricot"));
+	ds.insert(ds.begin() + 1, MyString("cherry"));
+
+	pr(ds, "Deque of MyString before erase");
+
+	for (auto it = ds.begin(); it != ds.end(); )
+	{
+		char* s = it->GetString();
+		if (s[0] == 'A' || s[0] == 'a')
+			it = ds.erase(it);
+		else
+			++it;
+	}
+
+	pr(ds, "Deque of MyString after erase");
 
 
 	////////////////////////////////////////////////////////////////////////////////////
@@ -41,6 +66,8 @@ int main()
 	//Напишите шаблон функции для вывода значений stack, queue, priority_queue
 	//Подумайте, как "получать" данное "с верхушки"?
 	//Что происходит с контейнерами после вывода значений?
+
+	
 
 
 
@@ -63,7 +90,7 @@ int main()
 	{
 
 
-		stop
+		//stop
 
 	}
 
@@ -94,7 +121,7 @@ int main()
 	{
 
 
-		stop
+		//stop
 	}
 
 
@@ -127,7 +154,7 @@ int main()
 
 	//е) замените один из КЛЮЧЕЙ на новый (была "Иванова", вышла замуж => стала "Петрова")
 
-	stop
+	//stop
 
 
 
@@ -176,7 +203,7 @@ int main()
 
 
 
-		stop
+		//stop
 
 		//С помощью алгоритма for_each в любой последовательности с элементами типа Point
 		//измените "координаты" на указанное значение (такой предикат тоже стоит реализовать 
@@ -231,7 +258,7 @@ int main()
 
 
 
-		stop
+		//stop
 	}
 	{// map
 

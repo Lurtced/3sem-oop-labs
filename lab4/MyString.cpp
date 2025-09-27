@@ -48,6 +48,12 @@ MyString& MyString::operator= (const MyString& str) // Операция прис
 	return *this;
 }
 
+std::ostream& operator<<(std::ostream& os, const MyString& str) {
+	if (str.m_pStr)
+		os << str.m_pStr;
+	return os;
+}
+
 // Метод класса
 char* MyString::GetString()
 {

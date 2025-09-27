@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <iostream>
 
 class MyString
 {
@@ -11,6 +12,7 @@ public:
     ~MyString();		// Объявление деструктора
 
 	MyString& operator= (const MyString& str); // Операция присвоения
+	
 	void Copy (const char* s);
 	char* GetString();	// Объявление метода (accessor)
 	int GetLength();	// Объявление метода (длина строки)
