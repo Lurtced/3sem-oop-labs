@@ -22,25 +22,51 @@ void pr(T& v, std::string s)
 	std::cout << '\n';
 }
 
+template<typename T>
+struct is_stack : std::false_type {}; // for general case
+template<typename T>
+struct is_stack<std::stack<T>> : std::true_type {}; // specialization for std::stack 
+													// (inherited from std::true_type)
+template<typename T>
+struct is_queue : std::false_type {};
+template<typename T, typename Container>
+struct is_queue<std::queue<T, Container>> : std::true_type {};
+
+template<typename T>
+struct is_priority_queue : std::false_type {};
+template<typename T, typename Container, typename Compare>
+struct is_priority_queue<std::priority_queue<T, Container, Compare>> : std::true_type {};
+
+
 template<typename Container>
 void printContainer(Container c) {
-	if constexpr (std::is_same_v<Container, std::stack<typename Container::value_type>>) {
+	if constexpr (is_stack<decltype(c)>::value) {
 		while (!c.empty()) {
 			std:: cout << c.top() << " ";
 			c.pop();
 		}
 	}
-	else if constexpr (std::is_same_v<Container, std::queue<typename Container::value_type>>) {
+	else if constexpr (is_queue<decltype(c)>::value) {
 		while (!c.empty()) {
 			std::cout << c.front() << " ";
 			c.pop();
 		}
 	}
-	else if constexpr (std::is_same_v<Container, std::priority_queue<typename Container::value_type>>) {
+	else if constexpr (is_priority_queue<decltype(c)>::value) {
 		while (!c.empty()) {
 			std::cout << c.top() << " ";
 			c.pop();
 		}
 	}
+	else {
+		std::cout << "Unsupported container type." << std::endl;
+		return;
+	}
 	std::cout << std::endl;
 }
+
+struct CompareString {
+	bool operator()(const char* a, const char* b) const {
+		return std::strcmp(a, b) > 0; // lexicographically biggest on top
+	}
+};

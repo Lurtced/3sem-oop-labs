@@ -219,9 +219,15 @@ int main()
 
 
 	{
-
-
-		//stop
+		std::vector<const char*> arr = { "banana", "apple", "cherry", "date" };
+		std::priority_queue<const char*> pq(arr.begin(), arr.end());
+		std::cout << "Priority Queue of const char*:" << std::endl;
+		printContainer(pq);
+		// They are not sorted, because the comparison is done based on pointer values, not string content.
+		// To correct this, we can use a custom comparator.
+		std::priority_queue<const char*, std::deque<const char*>, CompareString> pq2(arr.begin(), arr.end());
+		std::cout << "Priority Queue of const char* with custom comparator:" << std::endl;
+		printContainer(pq2);
 	}
 
 
