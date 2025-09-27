@@ -42,3 +42,9 @@ std::ostream& operator<<(std::ostream& os, const Point& point) {
     os << "Point(" << point.x_ << ", " << point.y_ << ")";
     return os;
 }
+
+bool Point::operator<(const Point& other) const {
+    if (x_ == other.x_)
+        return y_ < other.y_;
+    return x_ < other.x_;
+}

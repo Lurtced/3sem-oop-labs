@@ -54,6 +54,10 @@ std::ostream& operator<<(std::ostream& os, const MyString& str) {
 	return os;
 }
 
+bool MyString::operator< (const MyString& other) const {
+	return strcmp(m_pStr, other.m_pStr) < 0;
+}
+
 // Метод класса
 char* MyString::GetString()
 {

@@ -58,6 +58,7 @@ int main()
 	}
 
 	pr(ds, "Deque of MyString after erase");
+	std::cout << "\n\n";
 
 
 	////////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +68,38 @@ int main()
 	//Подумайте, как "получать" данное "с верхушки"?
 	//Что происходит с контейнерами после вывода значений?
 
-	
+	/*
+	Nothing happens to the containers after printing the values using the provided template function.
+	They remain unchanged because the function operates on a copy of the container.
+	*/
+
+	//testing
+	{
+		std::stack<int> s_int;
+		s_int.push(1);
+		s_int.push(2);
+		s_int.push(3);
+		std::cout << "Stack of int: ";
+		printContainer(s_int);
+		std::queue<double> q_double;
+		q_double.push(1.1);
+		q_double.push(2.2);
+		q_double.push(3.3);
+		std::cout << "Queue of double: ";
+		printContainer(q_double);
+		std::priority_queue<Point> pq_point;
+		pq_point.push(Point(1, 2));
+		pq_point.push(Point(3, 4));
+		pq_point.push(Point(5, 6));
+		std::cout << "Priority Queue of Point: ";
+		printContainer(pq_point);
+		std::stack<MyString> s_mystring;
+		s_mystring.push(MyString("Hello"));
+		s_mystring.push(MyString("World"));
+		s_mystring.push(MyString("C++"));
+		std::cout << "Stack of MyString: ";
+		printContainer(s_mystring);
+	}
 
 
 
