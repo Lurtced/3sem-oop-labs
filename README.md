@@ -5,9 +5,9 @@ It is designed in **Visual Studio** hence recommended to run in it.
 
 **Accepted** - 1, 2, 3, 5, 6
 
-**Done, wait to show** - 4
+**Waiting to show** - 4
 
-**Refactoring...** - 7
+**Refactoring** - 7
 
 See unfinished labs in separate branches.
 
