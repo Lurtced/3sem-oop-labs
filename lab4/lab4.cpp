@@ -14,6 +14,8 @@
 #include "MyString.h"
 #include "Point.h"
 
+#define NN std::cout << "\n\n";
+
 //using namespace std;
 //#define	  //stop __asm nop
 
@@ -58,7 +60,7 @@ int main()
 	}
 
 	pr(ds, "Deque of MyString after erase");
-	std::cout << "\n\n";
+	NN
 
 
 	////////////////////////////////////////////////////////////////////////////////////
@@ -119,7 +121,7 @@ int main()
 		pr(v, "Vector: ");
 		std::cout << "Stack: ";
 		printContainer(s);
-		std::cout << "\n\n";
+		NN
 	}
 
 
@@ -182,7 +184,7 @@ int main()
 			std::cout << "Stack s1 is less than stack s2.\n";
 		else
 			std::cout << "Stacks are equal.\n";
-		std::cout << "\n\n";
+		NN
 	}
 
 
@@ -254,7 +256,7 @@ int main()
 		int arr[] = { 3, 4, 5, 6, 7, 3, 4 };
 		setA.insert(arr, arr + sizeof(arr) / sizeof(arr[0]));
 		pr(setA, "Set A after inserting array elements");
-		std::cout << "\n\n";
+		NN
 	}
 
 
@@ -316,7 +318,7 @@ int main()
 	std::cout << "Translations for key \"" << key << "\ (using lower_bound and upper_bound):\n";
 	for (auto it = lb; it != ub; ++it)
 		std::cout << it->second << std::endl;
-	std::cout << "\n\n";
+	NN
 
 
 	///////////////////////////////////////////////////////////////////
@@ -331,7 +333,7 @@ int main()
 	std::vector<Point> pointVec(pointSet.rbegin(), pointSet.rend());
 	pr(pointSet, "Set of Points");
 	pr(pointVec, "Vector of Points in descending order");
-	std::cout << "\n\n";
+	NN
 
 
 		//Потоковые итераторы. С помощью ostream_iterator выведите содержимое
@@ -345,7 +347,7 @@ int main()
 	std::copy(pointVec.begin(), pointVec.end(),
 		std::ostream_iterator<Point>(std::cout, " "));
 
-	std::cout << "\n\n";
+	NN
 
 
 		//Итераторы вставки. С помощью возвращаемых функциями:
@@ -382,7 +384,7 @@ int main()
 
 	// all of them can be used for such containers which support insertion of elements
 	// with push_back, push_front or insert methods respectively.
-	std::cout << "\n\n";
+	NN
 
 
 
@@ -396,9 +398,10 @@ int main()
 		//распечатайте значения элементов
 		//Подсказка : неплохо вызываемую функцию определить как шаблон
 
-	std::vector<Point> intVec = { Point(1, 1), Point(2, 2), Point(3, 0) };
+	std::vector<Point> pVec = { Point(1, 1), Point(2, 2), Point(3, 0) };
 	std::cout << "Vector of int elements: ";
-	std::for_each(intVec.begin(), intVec.end(), printElement<decltype(intVec[0])>);
+	std::for_each(pVec.begin(), pVec.end(), printElement<decltype(pVec[0])>);
+	NN
 
 
 		//stop
@@ -407,12 +410,31 @@ int main()
 		//измените "координаты" на указанное значение (такой предикат тоже стоит реализовать 
 		//как шаблон) и выведите результат с помощью предыдущего предиката
 
+	float n = 3.2;
+	std::cout << "Adding " << n << " to each Point in vector:\n";
+	std::for_each(pVec.begin(), pVec.end(), [n](Point& p) {addToElement(p, n); });
+	std::for_each(pVec.begin(), pVec.end(), printElement<decltype(pVec[0])>);
+	NN
+
 
 
 
 		//С помощью алгоритма find() найдите в любой последовательности элементов Point
 		//все итераторы на элемент Point с указанным значением.
-
+	pVec.push_back(Point(2, 2));
+	pVec.push_back(Point(2, 2));
+	pVec[0] = Point(2, 2);
+	Point target(2, 2);
+	std::cout << "\nFinding all occurrences of " << target << " in vector:\n";
+	auto it = pVec.begin();
+	while (it != pVec.end()) {
+		it = std::find(it, pVec.end(), target);
+		if (it != pVec.end()) {
+			std::cout << "Found at position: " << std::distance(pVec.begin(), it) << std::endl;
+			++it;
+		}
+	}
+	NN
 
 
 

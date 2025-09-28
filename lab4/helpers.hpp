@@ -93,3 +93,8 @@ template <typename T>
 void printElement(const T& elem) {
 	std::cout << elem << " ";
 }
+
+template <typename T>
+void addToElement(T& elem, float value) {
+	elem += value;
+}

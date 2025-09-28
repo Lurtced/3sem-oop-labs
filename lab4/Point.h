@@ -17,6 +17,7 @@ public:
 
     bool operator ==(const Point& other) const;
     Point& operator =(const Point& other);
+	Point& operator +=(const float& n);
 	friend std::ostream& operator<<(std::ostream& os, const Point& point);
 	bool operator<(const Point& other) const;
 };
