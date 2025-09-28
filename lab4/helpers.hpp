@@ -6,6 +6,7 @@
 #include <stack>
 #include <queue>
 #include <deque>
+#include "Point.h"
 
 
 template <class T>
@@ -97,4 +98,10 @@ void printElement(const T& elem) {
 template <typename T>
 void addToElement(T& elem, float value) {
 	elem += value;
+}
+
+bool Pred1_1(const Point& elem) {
+	float n = 4.0;
+	float m = 7.9;
+	return (elem.getX() >= -n && elem.getX() <= m && elem.getY() >= -n && elem.getY() <= m);
 }

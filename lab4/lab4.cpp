@@ -13,6 +13,7 @@
 #include "helpers.hpp"
 #include "MyString.h"
 #include "Point.h"
+#include "Rect.h"
 
 #define NN std::cout << "\n\n";
 
@@ -456,7 +457,13 @@ int main()
 		//С помощью алгоритма find_if() найдите в любой последовательности элементов Point
 		//итератор на элемент Point, удовлетворяющий условию: координаты x и y лежат в промежутке
 		//[-n, +m].
-
+	pVec[0] = Point(11, 22);
+	auto it2 = std::find_if(pVec.begin(), pVec.end(), Pred1_1);
+	if (it2 != pVec.end())
+		std::cout << "Found Point satisfying Pred1_1: " << *it2 << std::endl;
+	else
+		std::cout << "No Point found satisfying Pred1_1.\n";
+	NN
 
 
 		//С помощью алгоритма sort() отсортируйте любую последовательность элементов Rect,
