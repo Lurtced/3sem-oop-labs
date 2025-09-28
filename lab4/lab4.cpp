@@ -248,8 +248,6 @@ int main()
 		set1.insert(Point(1, 2));
 		set1.insert(Point(5, 6));
 		pr(set1, "Set of Points");
-		// Point p = *(set1.begin());
-		// p = Point(7, 8); // This does not modify the set
 		std::set<int> setA = { 5, 3, 1, 4, 2 };
 		std::set<int> setB = { 1, 2, 3, 4, 5 };
 		std::cout << (setA == setB) ? "Sets A and B are equal.\n" : "Sets A and B are not equal.\n";
@@ -288,11 +286,37 @@ int main()
 		//multimap
 		//а) создайте "англо-русский" словарь, где одному и тому же ключу будут соответствовать
 		//		несколько русских значений - pair<string,string>, например: strange: чужой, странный...
+	std::multimap<std::string, std::string> dict = {
+	{"strange", "chuzhoy"},
+	{"apple", "yabloko"},
+	{"banana", "banan"}
+	};
 		//б) Заполните словарь парами с помощью метода insert или проинициализируйте с помощью 
 		//		вспомогательного массива пара (пары можно конструировать или создавать с помощью шаблона make_pair)
+	dict.insert(std::make_pair("strange", "strannyy"));
+	const char* en = "funny";
+	const char* ru[] = { "smeshnoy", "strannyy" };
+	for (const auto& r : ru)
+		dict.insert(std::make_pair(en, r));
+	dict.emplace(en, "zabavnyy");
 		//в) Выведите все содержимое словаря на экран
+	pr(dict, "Dictionary contents");
 		//г) Выведите на экран только варианты "переводов" для заданного ключа. Подсказка: для нахождения диапазона
 		//		итераторов можно использовать методы lower_bound() и upper_bound()
+	// with equal_range
+	std::string key = "strange";
+	auto range = dict.equal_range(key);
+	std::cout << "Translations for key \"" << key << "\" (using equal_range):\n";
+	for (auto it = range.first; it != range.second; ++it)
+		std::cout << it->second << std::endl;
+	std::cout << "\n";
+	// with lower_bound and upper_bound
+	auto lb = dict.lower_bound(key);
+	auto ub = dict.upper_bound(key);
+	std::cout << "Translations for key \"" << key << "\ (using lower_bound and upper_bound):\n";
+	for (auto it = lb; it != ub; ++it)
+		std::cout << it->second << std::endl;
+	std::cout << "\n\n";
 
 
 	///////////////////////////////////////////////////////////////////

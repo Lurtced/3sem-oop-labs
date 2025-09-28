@@ -8,15 +8,8 @@
 #include <deque>
 
 
-template <typename T>
-struct is_map : std::false_type {};
-template <typename K, typename V, typename... Args>
-struct is_map <std::map<K, V, Args...>> : std::true_type {};
-
-
 template <class T>
-std::enable_if_t<!is_map<T>::value>
-pr(const T& v, std::string s)
+void pr(const T& v, std::string s)
 {
     std::cout << "\n\n\t" << s << "  # Sequence:\n";
 
@@ -26,8 +19,18 @@ pr(const T& v, std::string s)
     std::cout << "\n";
 }
 
-template <class T1, class T2>
-void pr(const std::map<T1, T2>& m, std::string s)
+template <typename T1, typename T2, typename... Args>
+void pr(const std::map<T1, T2, Args...>& m, std::string s)
+{
+	std::cout << "\n\n\t" << s << "  # Sequence:\n";
+	int i = 0;
+	for (const auto& p : m)
+		std::cout << "\n" << ++i << ". " << p.first << " -> " << p.second;
+	std::cout << "\n";
+}
+
+template <typename T1, typename T2, typename... Args>
+void pr(const std::multimap<T1, T2, Args...>& m, std::string s)
 {
 	std::cout << "\n\n\t" << s << "  # Sequence:\n";
 	int i = 0;
