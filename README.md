@@ -5,9 +5,11 @@ It is designed in **Visual Studio** hence recommended to run in it.
 
 **Accepted** - 1, 2, 3, 5, 6
 
-**In process** - 4
+**Done, wait to show** - 4
 
-Not finished labs are in separate branches.
+**Refactoring...** - 7
+
+See unfinished labs in separate branches.
 
 *There may be some trash files, but the projects are working fine.*
 
