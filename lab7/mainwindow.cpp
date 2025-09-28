@@ -1,50 +1,57 @@
 ﻿#include "mainwindow.h"
 #include <QGraphicsView>
-#include <QPushButton>
-#include <QVBoxLayout>
 #include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsPolygonItem>
+#include <QToolBar>
+#include <QAction>
 
-MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
-    auto* view = new QGraphicsView;
+MainWindow::MainWindow(QWidget* parent)
+    : QMainWindow(parent)
+{
+    // создаём сцену с фиксированным размером
     scene = new QGraphicsScene(this);
-    view->setScene(scene);
+    scene->setSceneRect(0, 0, 800, 600);
 
-    auto* addRect = new QPushButton("Добавить прямоугольник");
-    auto* addEllipse = new QPushButton("Добавить эллипс");
-    auto* addTriangle = new QPushButton("Добавить треугольник");
+    // создаём виджет для сцены
+    auto* view = new QGraphicsView(scene, this);
+    view->setFixedSize(800, 600); // размер окна под сцену
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setDragMode(QGraphicsView::NoDrag); // запрет перемещения всей сцены
 
-    connect(addRect, &QPushButton::clicked, this, [this]() {
-        auto* r = new QGraphicsRectItem(0, 0, 80, 50);
-        r->setBrush(Qt::green);
-        r->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
-        scene->addItem(r);
-        });
+    setCentralWidget(view);
 
-    connect(addEllipse, &QPushButton::clicked, this, [this]() {
-        auto* e = new QGraphicsEllipseItem(0, 0, 80, 80);
-        e->setBrush(Qt::yellow);
-        e->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
-        scene->addItem(e);
-        });
+    // создаём тулбар с кнопками для добавления фигур
+    auto* toolbar = addToolBar("Shapes");
+    QAction* rectAct = toolbar->addAction("Rectangle");
+    QAction* ellipseAct = toolbar->addAction("Ellipse");
+    QAction* triAct = toolbar->addAction("Triangle");
 
-    connect(addTriangle, &QPushButton::clicked, this, [this]() {
-        QPolygonF poly;
-        poly << QPointF(0, 60) << QPointF(40, 0) << QPointF(80, 60);
-        auto* t = new QGraphicsPolygonItem(poly);
-        t->setBrush(Qt::red);
-        t->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
-        scene->addItem(t);
-        });
+    connect(rectAct, &QAction::triggered, this, &MainWindow::addRectangle);
+    connect(ellipseAct, &QAction::triggered, this, &MainWindow::addEllipse);
+    connect(triAct, &QAction::triggered, this, &MainWindow::addTriangle);
+}
 
-    auto* layout = new QVBoxLayout;
-    layout->addWidget(view);
-    layout->addWidget(addRect);
-    layout->addWidget(addEllipse);
-    layout->addWidget(addTriangle);
+MainWindow::~MainWindow() {}
 
-    auto* central = new QWidget;
-    central->setLayout(layout);
-    setCentralWidget(central);
+void MainWindow::addRectangle()
+{
+    auto* rect = scene->addRect(50, 50, 100, 60, QPen(Qt::black), QBrush(Qt::yellow));
+    rect->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+}
+
+void MainWindow::addEllipse()
+{
+    auto* ellipse = scene->addEllipse(200, 50, 80, 80, QPen(Qt::black), QBrush(Qt::green));
+    ellipse->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+}
+
+void MainWindow::addTriangle()
+{
+    QPolygonF triangle;
+    triangle << QPointF(0, 0) << QPointF(50, 100) << QPointF(-50, 100);
+    auto* poly = scene->addPolygon(triangle, QPen(Qt::black), QBrush(Qt::cyan));
+    poly->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+    poly->setPos(350, 50); // начальная позиция
 }

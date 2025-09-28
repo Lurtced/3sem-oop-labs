@@ -1,13 +1,19 @@
 #pragma once
 #include <QMainWindow>
 #include <QGraphicsScene>
-#include <QPushButton>
-#include <QGraphicsView>
-#include <QVBoxLayout>
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QMainWindow
+{
     Q_OBJECT
-        QGraphicsScene* scene;
 public:
     MainWindow(QWidget* parent = nullptr);
+    ~MainWindow();
+
+private slots:
+    void addRectangle();
+    void addEllipse();
+    void addTriangle();
+
+private:
+    QGraphicsScene* scene;
 };
