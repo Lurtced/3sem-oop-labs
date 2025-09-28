@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <deque>
-//#include <list>
+#include <list>
 #include <set>
 #include <map>
 #include <algorithm>
@@ -437,15 +437,18 @@ int main()
 	NN
 
 
-
-
 		//С помощью алгоритма sort() отсортируйте любую последовательность элементов Point. 
 		////По умолчанию алгоритм сортирует последовательность по возрастанию.
 		//Что должно быть определено в классе Point?
 		// Замечание: обобщенный алгоритм sort не работает со списком, так как
 		//это было бы не эффективно => для списка сортировка реализована методом класса!!!
 
-
+	std::sort(pVec.begin(), pVec.end());
+	std::list<Point> pList;
+	std::copy(pVec.begin(), pVec.end(), std::back_inserter(pList));
+	pr(pVec, "Sorted vector of Points");
+	pList.sort();
+	pr(pList, "Sorted list of Points");
 
 
 		//Создайте глобальную функцию вида: bool Pred1_1(const Point& ), которая будет вызываться
