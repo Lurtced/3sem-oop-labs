@@ -88,3 +88,8 @@ struct CompareString {
 		return std::strcmp(a, b) > 0; // lexicographically biggest on top
 	}
 };
+
+template <typename T>
+void printElement(const T& elem) {
+	std::cout << elem << " ";
+}

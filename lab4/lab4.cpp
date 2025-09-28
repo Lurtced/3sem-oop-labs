@@ -9,7 +9,7 @@
 //#include <list>
 #include <set>
 #include <map>
-//#include <algorithm>
+#include <algorithm>
 #include "helpers.hpp"
 #include "MyString.h"
 #include "Point.h"
@@ -382,6 +382,7 @@ int main()
 
 	// all of them can be used for such containers which support insertion of elements
 	// with push_back, push_front or insert methods respectively.
+	std::cout << "\n\n";
 
 
 
@@ -395,6 +396,9 @@ int main()
 		//распечатайте значения элементов
 		//Подсказка : неплохо вызываемую функцию определить как шаблон
 
+	std::vector<Point> intVec = { Point(1, 1), Point(2, 2), Point(3, 0) };
+	std::cout << "Vector of int elements: ";
+	std::for_each(intVec.begin(), intVec.end(), printElement<decltype(intVec[0])>);
 
 
 		//stop
