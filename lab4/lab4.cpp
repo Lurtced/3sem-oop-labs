@@ -468,11 +468,13 @@ int main()
 
 		//С помощью алгоритма sort() отсортируйте любую последовательность элементов Rect,
 		//располагая прямоугольники по удалению центра от начала координат.
-
-
-
-
-
+	
+	std::vector<Rect> rectVec = { Rect(2,2,3,3),  Rect(1,1,2,2), Rect(0,0,1,1), Rect(-1,-1,0,0), Rect(19, 20, -21, 23)};
+	rectVec.push_back(Rect(0, 0, 0, 0));
+	rectVec[3] = Rect(0.1, 0.2, 0.3, 0.4);
+	pr(rectVec, "Vector of Rect before sorting");
+	std::sort(rectVec.begin(), rectVec.end(), CompareRectCenters());
+	pr(rectVec, "Vector of Rect after sorting by center distance from origin");
 
 
 	{//transform

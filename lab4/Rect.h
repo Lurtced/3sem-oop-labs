@@ -1,6 +1,7 @@
 #pragma once
 #include "Shape.h"
 #include "MyVector.h"
+#include <iostream>
 
 
 class Rect : public Shape {
@@ -19,7 +20,8 @@ public:
 	void Out() override;
 	void Move(Vector& v) override;
 	double Area() override;
-
+	Vector getCenter() const;
 
 	Rect& operator= (const Rect& r);
+	friend std::ostream& operator<< (std::ostream& out, const Rect& r);
 };

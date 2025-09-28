@@ -126,14 +126,18 @@
   <ItemGroup>
     <ClCompile Include="lab4.cpp" />
     <ClCompile Include="MyString.cpp" />
+    <ClCompile Include="MyVector.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="Shape.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helpers.hpp" />
     <ClInclude Include="MyString.h" />
+    <ClInclude Include="MyVector.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Rect.h" />
+    <ClInclude Include="Shape.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

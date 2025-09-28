@@ -50,6 +50,11 @@ double Rect::Area() {
 	return (ptLT.GetY() + ptRB.GetY()) * (ptLT.GetX() + ptRB.GetX());
 }
 
+Vector Rect::getCenter() const
+{
+	return Vector((ptLT.GetX() + ptRB.GetX()) / 2, (ptLT.GetY() + ptRB.GetY()) / 2);
+}
+
 Rect& Rect::operator= (const Rect& r)
 {
 	if (this == &r)
@@ -57,4 +62,10 @@ Rect& Rect::operator= (const Rect& r)
 	ptLT = r.ptLT;
 	ptRB = r.ptRB;
 	return *this;
+}
+
+std::ostream& operator<< (std::ostream& out, const Rect& r)
+{
+	out << "Rect(" << r.ptLT << ", " << r.ptRB << ")";
+	return out;
 }

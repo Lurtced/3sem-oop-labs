@@ -7,6 +7,8 @@
 #include <queue>
 #include <deque>
 #include "Point.h"
+#include "MyVector.h"
+#include "Rect.h"
 
 
 template <class T>
@@ -105,3 +107,11 @@ bool Pred1_1(const Point& elem) {
 	float m = 7.9;
 	return (elem.getX() >= -n && elem.getX() <= m && elem.getY() >= -n && elem.getY() <= m);
 }
+
+struct CompareRectCenters {
+	bool operator()(const Rect& r1, const Rect& r2) const {
+		Vector center1 = r1.getCenter();
+		Vector center2 = r2.getCenter();
+		return center1 < center2; // Rect with the farthest center from origin has higher priority
+	}
+};
