@@ -7,6 +7,8 @@ It is designed in **Visual Studio** hence recommended to run in it.
 
 **In process** - 4
 
+Not finished labs are in separate branches.
+
 *There may be some trash files, but the projects are working fine.*
 
 ___
