@@ -514,18 +514,14 @@ int main()
 		//Создайте (и распечатайте для проверки) map<string, int>, который будет
 		//содержать упорядоченные по алфавиту строки и
 		//количество повторений каждой строки в векторе
-
-
-
-
-
-
-
-
+		
+		std::vector<std::string> words = { "apple", "banana", "Apple", "orange", "banana", "apple", "kiwi", "Orange" };
+		std::map<std::string, int> wordCount;
+		for (const auto& word : words) {
+			++wordCount[word];
+		}
+		pr(wordCount, "Map of word counts");
 	}
-
-
-
 
 	return 0;
 }
