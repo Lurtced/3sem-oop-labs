@@ -475,6 +475,7 @@ int main()
 	pr(rectVec, "Vector of Rect before sorting");
 	std::sort(rectVec.begin(), rectVec.end(), CompareRectCenters());
 	pr(rectVec, "Vector of Rect after sorting by center distance from origin");
+	NN
 
 
 	{//transform
@@ -483,6 +484,12 @@ int main()
 		//Подсказка: класс string - это "почти" контейнер, поэтому для него
 		// определены методы begin() и end()
 
+		std::string helloWorld = "HELLo, WOrlD!";
+		std::string helloworld = " ";
+		lowerCase(helloWorld, helloworld);
+		std::cout << "Original string: " << helloWorld << std::endl;
+		std::cout << "Lowercase string: " << helloworld << std::endl;
+		NN
 
 		//Заполните list объектами string. С помощью алгоритма transform сформируте
 		//значения "пустого" set, конвертируя строки в нижний регистр

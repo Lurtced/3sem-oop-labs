@@ -6,6 +6,7 @@
 #include <stack>
 #include <queue>
 #include <deque>
+#include <algorithm>
 #include "Point.h"
 #include "MyVector.h"
 #include "Rect.h"
@@ -115,3 +116,10 @@ struct CompareRectCenters {
 		return center1 < center2; // Rect with the farthest center from origin has higher priority
 	}
 };
+
+void lowerCase(std::string& input, std::string& output) {
+	output.resize(input.size());
+	std::transform(input.begin(), input.end(), 
+		output.begin(),
+		[](unsigned char c) { return std::tolower(c); });
+}
