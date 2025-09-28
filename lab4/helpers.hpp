@@ -117,7 +117,7 @@ struct CompareRectCenters {
 	}
 };
 
-void lowerCase(std::string& input, std::string& output) {
+void lowerCase(const std::string& input, std::string& output) {
 	output.resize(input.size());
 	std::transform(input.begin(), input.end(), 
 		output.begin(),

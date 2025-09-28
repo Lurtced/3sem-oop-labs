@@ -494,8 +494,17 @@ int main()
 		//Заполните list объектами string. С помощью алгоритма transform сформируте
 		//значения "пустого" set, конвертируя строки в нижний регистр
 
-
-
+		std::list<std::string> strList = { "One", "Two", "Three", "FOUR", "Five" };
+		pr(strList, "List of strings");
+		std::set<std::string> strSet;
+		std::transform(strList.begin(), strList.end(),
+			std::inserter(strSet, strSet.begin()),
+			[](const std::string& s) {
+				std::string lower;
+				lowerCase(s, lower);
+				return lower;
+			});
+		pr(strSet, "Set of lowercase strings");
 
 		//stop
 	}
