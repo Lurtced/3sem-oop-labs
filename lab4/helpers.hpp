@@ -8,19 +8,34 @@
 #include <deque>
 
 
+template <typename T>
+struct is_map : std::false_type {};
+template <typename K, typename V, typename... Args>
+struct is_map <std::map<K, V, Args...>> : std::true_type {};
+
+
 template <class T>
-void pr(T& v, std::string s)
+std::enable_if_t<!is_map<T>::value>
+pr(const T& v, std::string s)
+{
+    std::cout << "\n\n\t" << s << "  # Sequence:\n";
+
+    int i = 0;
+    for (const auto& x : v)
+        std::cout << "\n" << ++i << ". " << x;
+    std::cout << "\n";
+}
+
+template <class T1, class T2>
+void pr(const std::map<T1, T2>& m, std::string s)
 {
 	std::cout << "\n\n\t" << s << "  # Sequence:\n";
-
-	typename T::iterator p;
-
-	int i;
-
-	for (p = v.begin(), i = 0; p != v.end(); p++, i++)
-		std::cout << '\n' << i + 1 << ". " << *p;
-	std::cout << '\n';
+	int i = 0;
+	for (const auto& p : m)
+		std::cout << "\n" << ++i << ". " << p.first << " -> " << p.second;
+	std::cout << "\n";
 }
+
 
 template<typename T>
 struct is_stack : std::false_type {}; // for general case

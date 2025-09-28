@@ -7,8 +7,8 @@
 #include <vector>
 #include <deque>
 //#include <list>
-//#include <set>
-//#include <map>
+#include <set>
+#include <map>
 //#include <algorithm>
 #include "helpers.hpp"
 #include "MyString.h"
@@ -242,6 +242,22 @@ int main()
 	//д) Вставьте в любое множество диапазон элементов из любого другого
 	//	контейнера, например, элементов массива	(что происходит, если в массиве имеются дубли?)
 
+	{
+		std::set<Point> set1;
+		set1.insert(Point(3, 4));
+		set1.insert(Point(1, 2));
+		set1.insert(Point(5, 6));
+		pr(set1, "Set of Points");
+		// Point p = *(set1.begin());
+		// p = Point(7, 8); // This does not modify the set
+		std::set<int> setA = { 5, 3, 1, 4, 2 };
+		std::set<int> setB = { 1, 2, 3, 4, 5 };
+		std::cout << (setA == setB) ? "Sets A and B are equal.\n" : "Sets A and B are not equal.\n";
+		int arr[] = { 3, 4, 5, 6, 7, 3, 4 };
+		setA.insert(arr, arr + sizeof(arr) / sizeof(arr[0]));
+		pr(setA, "Set A after inserting array elements");
+		std::cout << "\n\n";
+	}
 
 
 
@@ -255,14 +271,18 @@ int main()
 	//map	
 	//а) создайте map, который хранит пары "фамилия, зарплата" - pair<const char*, int>,
 	//	при этом строки задаются строковыми литералами
+	std::map <const char*, int> salaryMap;
 	//б) заполните контейнер значениями посредством operator[] и insert()
+	salaryMap["Ivanova"] = 50000;
+	salaryMap["Petrov"] = 60000;
+	salaryMap.insert(std::make_pair("Sidorov", 55000));
 	//в) распечатайте содержимое
-
+	pr(salaryMap, "Salary Map before key change");
 	//е) замените один из КЛЮЧЕЙ на новый (была "Иванова", вышла замуж => стала "Петрова")
-
-	//stop
-
-
+	int salary = salaryMap["Ivanova"];
+	salaryMap.erase("Ivanova");
+	salaryMap["Petrova"] = salary;
+	pr(salaryMap, "Salary Map after key change");
 
 		////////////////////////////////////////////////////////////////////////////////////
 		//multimap
