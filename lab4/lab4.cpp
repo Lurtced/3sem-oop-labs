@@ -327,9 +327,25 @@ int main()
 		//нужно перегрузить в классе Point. Создайте вектор, элементы которого 
 		//являются копиями элементов set, но упорядочены по убыванию
 
+	std::set<Point> pointSet = { Point(1, 2), Point(3, 4), Point(5, 6) };
+	std::vector<Point> pointVec(pointSet.rbegin(), pointSet.rend());
+	pr(pointSet, "Set of Points");
+	pr(pointVec, "Vector of Points in descending order");
+	std::cout << "\n\n";
+
 
 		//Потоковые итераторы. С помощью ostream_iterator выведите содержимое
 		//vector и set из предыдущего задания на экран.
+
+	std::cout << "\nSet via ostream_iterator: ";
+	std::copy(pointSet.begin(), pointSet.end(),
+		std::ostream_iterator<Point>(std::cout, " "));
+
+	std::cout << "\nVector via ostream_iterator: ";
+	std::copy(pointVec.begin(), pointVec.end(),
+		std::ostream_iterator<Point>(std::cout, " "));
+
+	std::cout << "\n\n";
 
 
 		//Итераторы вставки. С помощью возвращаемых функциями:
@@ -338,6 +354,34 @@ int main()
 		//inserter()
 		//итераторов вставки добавьте элементы в любой из созданных контейнеров. Подумайте:
 		//какие из итераторов вставки можно использовать с каждым контейнером.
+	std::vector<Point> vec2 = { Point(4,3), Point(1,1) };
+	std::set<Point> set2 = { Point(2,2), Point(3,3) };
+
+	// Append vec2 to pointVec
+	std::copy(vec2.begin(), vec2.end(), std::back_inserter(pointVec));
+	pr(pointVec, "pointVec after back_inserter with vec2");
+
+	// If you want to prepend to vec2, use inserter to the last position instead of front_inserter
+	std::copy(pointVec.begin(), pointVec.end(), std::inserter(vec2, vec2.begin()));
+	pr(vec2, "vec2 after inserter with pointVec at beginning");
+
+	// Insert set2 into pointSet
+	pr(pointSet, "pointSet before inserter");
+	std::copy(set2.begin(), set2.end(), std::inserter(pointSet, pointSet.end()));
+	pr(pointSet, "pointSet after inserter");
+
+	// And now front_inserter with deque
+	std::deque<Point> deq;
+	std::copy(vec2.begin(), vec2.end(), std::front_inserter(deq));
+	pr(deq, "deque after initializing with front_inserter with vec2");
+
+	// Adding single element using front_inserter
+	Point p(0, 0);
+	std::copy(&p, &p + 1, std::front_inserter(deq));
+	pr(deq, "deque after adding single element with front_inserter");
+
+	// all of them can be used for such containers which support insertion of elements
+	// with push_back, push_front or insert methods respectively.
 
 
 
