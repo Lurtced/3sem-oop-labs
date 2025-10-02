@@ -6,10 +6,9 @@
 
 class ShapeWidget : public QWidget {
     Q_OBJECT
-
         QVector<Shape*> shapes;   // коллекция фигур
-    Shape* active = nullptr;  // активная фигура
-    QPoint lastPos;           // последняя позиция мыши
+    Shape* active = nullptr;   // активная фигура
+    QPoint lastPos;            // последняя позиция мыши
 
 public:
     ShapeWidget(QWidget* parent = nullptr) : QWidget(parent) {}
@@ -32,7 +31,18 @@ protected:
     void paintEvent(QPaintEvent*) override {
         QPainter p(this);
         p.setRenderHint(QPainter::Antialiasing);
-        for (auto s : shapes) s->draw(&p);
+
+        for (auto s : shapes) {
+            s->draw(p);
+
+            // Стиль выделения как в QGraphicsScene
+            if (s == active) {
+                p.setBrush(Qt::NoBrush);
+                p.setPen(QPen(Qt::black, 1, Qt::DashLine)); // синяя пунктирная рамка
+                QRect r = s->boundingRect();
+                p.drawRect(r); // рамка по boundingRect
+            }
+        }
     }
 
     void mousePressEvent(QMouseEvent* e) override {
@@ -47,6 +57,7 @@ protected:
             }
         }
         active = nullptr;
+        update();
     }
 
     void mouseMoveEvent(QMouseEvent* e) override {
@@ -59,6 +70,6 @@ protected:
     }
 
     void mouseReleaseEvent(QMouseEvent*) override {
-        active = nullptr;
+        // активная фигура остаётся выделенной
     }
 };
