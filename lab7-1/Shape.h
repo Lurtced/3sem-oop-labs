@@ -9,7 +9,6 @@ protected:
     QColor color;
 public:
     Shape(const QRect& r, const QColor& c) : rect(r), color(c) {}
-    virtual ~Shape() = default;
 
     virtual void draw(QPainter& p) = 0;
     virtual bool contains(const QPoint& pt) { return rect.contains(pt); }

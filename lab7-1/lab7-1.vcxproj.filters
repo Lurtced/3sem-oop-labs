@@ -36,10 +36,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="MainWindow.h">
+    <QtMoc Include="ShapeWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ShapeWidget.h">
+    <QtMoc Include="MainWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
