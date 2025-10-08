@@ -6,16 +6,16 @@
 
 class ShapeWidget : public QWidget {
     Q_OBJECT
-        QVector<Shape*> shapes;   // коллекция фигур
-    Shape* active = nullptr;   // активная фигура
-    QPoint lastPos;            // последняя позиция мыши
+    QVector<Shape*> shapes;    // all figures collection; can use std::vector<Shape*> instead in this case
+    Shape* active = nullptr;   // active figure
+    QPoint lastPos;            // last mouse position
 
 public:
-    ShapeWidget(QWidget* parent = nullptr) : QWidget(parent) {}
+    ShapeWidget(QWidget* parent) : QWidget(parent) {} // where to create it
 
     void addShape(Shape* s) {
-        shapes.push_back(s);
-        update();
+        shapes.push_back(s); // added new figure
+        update(); // mark as 'needed for repainting'
     }
 
     void removeActiveShape() {
@@ -29,34 +29,34 @@ public:
 
 protected:
     void paintEvent(QPaintEvent*) override {
-        QPainter p(this);
-        p.setRenderHint(QPainter::Antialiasing);
+        QPainter p(this); // create painter for this widget
+        p.setRenderHint(QPainter::Antialiasing); // make it smoother
 
         for (auto s : shapes) {
-            s->draw(p);
+            s->draw(p); // draw each shape
 
-            // Стиль выделения как в QGraphicsScene
+            // selection boundary
             if (s == active) {
                 p.setBrush(Qt::NoBrush);
-                p.setPen(QPen(Qt::black, 1, Qt::DashLine)); // синяя пунктирная рамка
+                p.setPen(QPen(Qt::black, 1, Qt::DashLine));
                 QRect r = s->boundingRect();
-                p.drawRect(r); // рамка по boundingRect
+                p.drawRect(r); // frame
             }
         }
     }
 
     void mousePressEvent(QMouseEvent* e) override {
-        for (int i = shapes.size() - 1; i >= 0; --i) {
+        for (int i = shapes.size() - 1; i >= 0; --i) { // from end because there is top
             if (shapes[i]->contains(e->pos())) {
                 active = shapes[i];
                 shapes.remove(i);
-                shapes.push_back(active); // поднять на передний план
+                shapes.push_back(active);
                 lastPos = e->pos();
                 update();
-                return;
+                return; // later we'll reset 'active' otherwise
             }
         }
-        active = nullptr;
+        active = nullptr; // if no figure clicked
         update();
     }
 
@@ -67,9 +67,5 @@ protected:
             lastPos = e->pos();
             update();
         }
-    }
-
-    void mouseReleaseEvent(QMouseEvent*) override {
-        // активная фигура остаётся выделенной
     }
 };
