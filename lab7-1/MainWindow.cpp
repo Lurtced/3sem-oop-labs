@@ -4,8 +4,10 @@
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) // call parent QMainWindow constructor with parent widget
 {
-    widget = new ShapeWidget(this); // create the widget canvas where shapes will be drawn
+    setFixedSize(800, 600); // user cannot resize
 
+    widget = new ShapeWidget(this); // create the widget canvas where shapes will be drawn
+    
     setCentralWidget(widget); // it becomes main here and occupies the whole area
 
     auto* toolbar = new QToolBar("Shapes", this);
